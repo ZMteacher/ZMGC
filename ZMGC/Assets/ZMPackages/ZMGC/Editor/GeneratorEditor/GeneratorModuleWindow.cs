@@ -9,7 +9,7 @@ public class GeneratorModuleWindow : EditorWindow
 {
 
     public GeneratorModuleConfig moduleConfig; // 引用ScriptableObject配置
-
+    private bool isAutoGenerator = false;
     private string mScriptTxt;
     private string mFilePath;
     private string mFileName;
@@ -18,7 +18,7 @@ public class GeneratorModuleWindow : EditorWindow
 
     private bool[] mModuleToggleArr = new bool[] { };
    
-    private string[] mFolderArr = new string[] { "/DataMgr/","/MsgMgr/","/LogicCtrl/"};
+    private string[] mFolderArr = new string[] { "/DataLayer/","/MsgLayer/","/LogicLayer/"};
     private int mLastIndex = -1;
     private int mColumns =3; // 指定每行的 Toggle 个数
     private int mColumnWidth=300;
@@ -28,8 +28,22 @@ public class GeneratorModuleWindow : EditorWindow
         window.Show();
         window.mScriptTxt = conent;
         window.mFileName = fileName;
+      
     }
-
+    public static void ShowWindow(string conent, string fileName,string worldName,bool isAutoGenerator,string folder)
+    {
+        GeneratorModuleWindow window = (GeneratorModuleWindow)GetWindow(typeof(GeneratorModuleWindow),false,"MVC脚本生成检查器");
+        window.Show();
+        window.mScriptTxt = conent;
+        window.mFileName = fileName;
+        if (isAutoGenerator)
+        {
+            window.isAutoGenerator = true;
+            window.moduleConfig = AssetDatabase.LoadAssetAtPath<GeneratorModuleConfig>(GeneratorModuleConfigEditorWindow.ConfigAssetPath);
+            window.mFilePath = $"{Application.dataPath}/{window.moduleConfig.savePath}/{worldName}/{folder}/{window.mFileName}";
+            window.CreateScripts();
+        }
+    }
     public void OnGUI()
     {
         if (moduleConfig == null)
@@ -131,6 +145,11 @@ public class GeneratorModuleWindow : EditorWindow
         mScriptTxt = string.Empty;
         Debug.Log("Create Code finish! Cs path:" + mFilePath);
         AssetDatabase.Refresh();
+        if (isAutoGenerator)
+        {
+            Close();
+            return;
+        }
         if (EditorUtility.DisplayDialog("自动化工具", "生成脚本成功！", "确定"))
         {
             Close();

@@ -21,12 +21,19 @@ public class GeneratorMsgCtrl
         }
  
         string msgName = gameObject.name.Replace("Window", "")+ "MsgMgr";
-        string viewStr = GeneratorMsgScrpts(msgName);
+        string viewStr = GeneratorMsgScripts(msgName);
         GeneratorModuleWindow.ShowWindow(viewStr, msgName + ".cs");
     }
-    public static string GeneratorMsgScrpts(string scriptsName)
+
+     
+    public static void AutoGeneratorMsgScripts(string worldName, string scriptsName,string nameSpace="ZMGC.None", bool isAutoGenerator=false)
     {
-        string nameSpaceName="ZMGC.None";
+        string viewStr = GeneratorMsgScripts(scriptsName,nameSpace);
+        GeneratorModuleWindow.ShowWindow(viewStr, scriptsName + ".cs",worldName,isAutoGenerator,"MsgLayer");
+    }
+    public static string GeneratorMsgScripts(string scriptsName,string nameSpace="ZMGC.None")
+    {
+        string nameSpaceName=nameSpace;
         StringBuilder sb = new StringBuilder();
         //var writer = File.CreateText(scriptFile);
         sb.AppendLine("/*--------------------------------------------------------------------------------------");

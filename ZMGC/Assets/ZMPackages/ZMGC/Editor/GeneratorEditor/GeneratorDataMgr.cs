@@ -21,12 +21,17 @@ public class GeneratorDataCtrl
         }
  
         string dataName = gameObject.name.Replace("Window", "") + "DataMgr";
-        string viewStr = GeneratorDataScrpts(dataName);
+        string viewStr = GeneratorDataScripts(dataName);
         GeneratorModuleWindow.ShowWindow(viewStr, dataName + ".cs");
     }
-    public static string GeneratorDataScrpts(string scriptsName)
+    public static void AutoGeneratorDataScripts(string worldName, string scriptsName,string nameSpace="ZMGC.None", bool isAutoGenerator=false)
     {
-        string nameSpaceName= "ZMGC.None";
+        string viewStr = GeneratorDataScripts(scriptsName,nameSpace);
+        GeneratorModuleWindow.ShowWindow(viewStr, scriptsName + ".cs",worldName,isAutoGenerator,"DataLayer");
+    }
+    public static string GeneratorDataScripts(string scriptsName,string nameSpace="ZMGC.None")
+    {
+        string nameSpaceName= nameSpace;
         StringBuilder sb = new StringBuilder();
         //var writer = File.CreateText(scriptFile);
         sb.AppendLine("/*--------------------------------------------------------------------------------------");

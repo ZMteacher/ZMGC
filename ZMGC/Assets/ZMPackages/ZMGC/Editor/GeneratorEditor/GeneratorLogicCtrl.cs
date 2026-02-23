@@ -21,12 +21,18 @@ public class GeneratorLogicCtrl
         }
  
         string logicName = gameObject.name.Replace("Window", "")+ "LogicCtrl";
-        string viewStr = GeneratorLogicScrpts(logicName);
+        string viewStr = GeneratorLogicScripts(logicName);
         GeneratorModuleWindow.ShowWindow(viewStr, logicName+".cs");
     }
-    public static string GeneratorLogicScrpts(string scriptsName)
+    
+    public static void AutoGeneratorLogicScripts(string worldName, string scriptsName,string nameSpace="ZMGC.None", bool isAutoGenerator=false)
     {
-        string nameSpaceName= "ZMGC.None";
+        string viewStr = GeneratorLogicScripts(scriptsName,nameSpace);
+        GeneratorModuleWindow.ShowWindow(viewStr, scriptsName + ".cs",worldName,isAutoGenerator,"LogicLayer");
+    }
+    public static string GeneratorLogicScripts(string scriptsName,string nameSpace="ZMGC.None")
+    {
+        string nameSpaceName=nameSpace;
         StringBuilder sb = new StringBuilder();
         //var writer = File.CreateText(scriptFile);
         sb.AppendLine("/*--------------------------------------------------------------------------------------");

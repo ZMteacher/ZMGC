@@ -15,4 +15,17 @@ public class GeneratorModuleConfig : ScriptableObject
     }
 
     public ModuleInfo[] modules;
+    
+    public void GetNameSpaceByWorldName(string moduleName, out string nameSpace)
+    {
+        nameSpace = null;
+        foreach (var module in modules)
+        {
+            if (module.moduleName == moduleName)
+            {
+                nameSpace = module.moduleNamespace;
+                return;
+            }
+        }
+    }
 }
