@@ -4,6 +4,7 @@ using System.Reflection;
 using UnityEngine;
 public enum WorldEnum
 {
+    UnknownWorld,
     LoginWorld,
     HallWorld,
     SKWorld,
@@ -14,7 +15,8 @@ public enum WorldEnum
 /// </summary>
 public class WorldManager
 {
-    /// <summary>
+    #region 属性
+    /// <summary>   
     /// 构建状态
     /// </summary>
     public static bool Builder { get; private set; }
@@ -39,7 +41,9 @@ public class WorldManager
     /// 构建世界成功回调
     /// </summary>
     public static Action<WorldEnum> OnCreateWorldSuccessListener;
+    #endregion
     
+    #region 构建游戏世界
     /// <summary>
     /// 构建一个游戏世界
     /// </summary>
@@ -69,7 +73,7 @@ public class WorldManager
     }
     
     /// <summary>
-    /// Suppert HyBridCLR通过反射的方式构建对应世界
+    /// Support HyBridCLR通过反射的方式构建对应世界
     /// </summary>
     /// <param name="worldFullName"></param>
     public static void CreateWorldByReflection(Assembly assembly, string worldFullName="ZMGC.SK.SKWorld")
@@ -89,6 +93,7 @@ public class WorldManager
         object world = genericMethod.Invoke(null, null);
         Debug.Log($"成功创建World<{worldType.Name}>实例");
     }
+    
     /// <summary>
     /// 获取对应世界下指定的脚本创建优先级
     /// </summary>
@@ -101,12 +106,19 @@ public class WorldManager
             CurWorldEnum = WorldEnum.HallWorld;
             return new HallWorldScriptExecutionOrder();
         }
-        else if (world.GetType().Name == "SKWorld")
-        {
-            CurWorldEnum = WorldEnum.SKWorld;
-            return new HallWorldScriptExecutionOrder();
-        }
         return null;
+    }
+    #endregion
+
+    #region 游戏世界更新程序
+    /// <summary>
+    /// 初始化世界更新程序
+    /// </summary>
+    public static void InitWorldUpdater()
+    {
+        GameObject worldObj = new GameObject("WorldUpdater");
+        WorldUpdater = worldObj.AddComponent<WorldUpdater>();
+        GameObject.DontDestroyOnLoad(worldObj);
     }
     /// <summary>
     /// 渲染帧更新,尽量少使用Update接口提升性能。但必要时，可以在对应World的Update中调用指定脚本的Update
@@ -122,17 +134,15 @@ public class WorldManager
         }
     }
     /// <summary>
-    /// 初始化世界更新程序
-    /// 
+    /// 销毁世界更新程序
     /// </summary>
-    public static void InitWorldUpdater()
+    private static void DestroyWorldUpdater()
     {
-        GameObject worldObj = new GameObject("WorldUpdater");
-        WorldUpdater = worldObj.AddComponent<WorldUpdater>();
-        GameObject.DontDestroyOnLoad(worldObj);
+        GameObject.Destroy(WorldUpdater.gameObject);
     }
+    #endregion
 
-
+    #region 销毁释放游戏世界
     /// <summary>
     /// 销毁指定游戏世界
     /// </summary>
@@ -155,5 +165,22 @@ public class WorldManager
             }
         }
     }
-    
+    /// <summary>
+    /// 清理世界
+    /// </summary>
+    public static void OnRlease()
+    {
+        foreach (World world in mWorldList)
+        {
+            world.OnDestroy();
+        }
+
+        CurWorldEnum = WorldEnum.UnknownWorld;
+        mWorldList.Clear();
+        DestroyWorldUpdater();
+        Builder = false;
+        DefaultGameWorld = null;
+        OnCreateWorldSuccessListener = null;
+    }
+    #endregion
 }

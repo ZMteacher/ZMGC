@@ -47,23 +47,31 @@ public class WorldTypeManager
         dataBehaviourList.Sort((a, b) => a.order.CompareTo(b.order));
         msgBehaviourList.Sort((a, b) => a.order.CompareTo(b.order));
 
+        List<IDataBehaviour> dataList = new List<IDataBehaviour>();
+        List<IMsgBehaviour> msgList = new List<IMsgBehaviour>();
+        List<ILogicBehaviour> logicList = new List<ILogicBehaviour>();
+        
         //初始化数据层脚本、消息层脚本、逻辑层脚本
         for (int i = 0; i < dataBehaviourList.Count; i++)
         {
             IDataBehaviour data= Activator.CreateInstance(dataBehaviourList[i].type) as IDataBehaviour;
             world.AddDataMgr(data);
+            dataList.Add(data);
         }
         for (int i = 0; i < msgBehaviourList.Count; i++)
         {
             IMsgBehaviour msg = Activator.CreateInstance(msgBehaviourList[i].type) as IMsgBehaviour;
             world.AddMsgMgr(msg);
+            msgList.Add(msg);
         }
         for (int i = 0; i < logicBehaviourList.Count; i++)
         {
             ILogicBehaviour logic = Activator.CreateInstance(logicBehaviourList[i].type) as ILogicBehaviour;
             world.AddLogicCtrl(logic);
+            logicList.Add(logic);
         }
 
+        world.OnInitCreate(dataList,msgList,logicList);
         logicBehaviourList.Clear();
         dataBehaviourList.Clear();
         msgBehaviourList.Clear();

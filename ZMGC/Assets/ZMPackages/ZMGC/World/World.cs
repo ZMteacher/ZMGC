@@ -20,7 +20,7 @@ public partial class World
     /// 消息层所有类的一个字典
     /// </summary>
     private static Dictionary<string, IMsgBehaviour> mMsgBehaviourDic = new Dictionary<string, IMsgBehaviour>();
-
+  
     /// <summary>
     /// 世界构建初触发
     /// </summary>
@@ -85,46 +85,55 @@ public partial class World
     /// </summary>
     /// <param name="args"></param>
     public virtual void OnDestroyPostProcess(object args) { }
+    
     /// <summary>
     /// 获取逻辑层控制器
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    public static T GetExitsLogicCtrl<T>()where T:ILogicBehaviour
+    public static T GetLogicLayer<T>() where T : ILogicBehaviour
     {
-        if (mLogicBehaviourDic.TryGetValue(typeof(T).Name,out var logic))
+        var typeName = TypeNameCache<T>.Name;
+        if (mLogicBehaviourDic.TryGetValue(typeName, out var logic))
         {
             return (T)logic;
         }
-        Debug.LogError($"{typeof(T).Name}Not Get class Failed! Please check Params");
+        Debug.LogError($"{typeName} Not Get class Failed! Please check Params");
         return default(T);
     }
+    
     /// <summary>
     /// 获取数据管理器
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    public static T GetExitsDataMgr<T>() where T : IDataBehaviour
+    public static T GetDataLayer<T>() where T : IDataBehaviour
     {
-        if (mDataBehaviourDic.TryGetValue(typeof(T).Name, out var data))
+        var typeName = TypeNameCache<T>.Name;
+        if (mDataBehaviourDic.TryGetValue(typeName, out var data))
         {
             return (T)data;
         }
-        Debug.LogError($"{typeof(T).Name}Not Get class Failed! Please check Params");
+        Debug.LogError($"{typeName} Not Get class Failed! Please check Params");
         return default(T);
     }
+    
     /// <summary>
     /// 获取消息层管理器
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    public static T GetExitsMsgMgr<T>() where T : IMsgBehaviour
+    public static T GetMsgLayer<T>() where T : IMsgBehaviour
     {
-        if (mMsgBehaviourDic.TryGetValue(typeof(T).Name, out var msg))
+        var typeName = TypeNameCache<T>.Name;
+        if (mMsgBehaviourDic.TryGetValue(typeName, out var msg))
         {
             return (T)msg;
         }
-        Debug.LogError($"{typeof(T).Name}Not Get class Failed! Please check Params");
+        Debug.LogError($"{typeName} Not Get class Failed! Please check Params");
         return default(T);
     }
+    
+    /// <summary>
+    /// 泛型类型名称缓存（避免重复调用typeof(T).Name）
+    /// </summary>
+    private static class TypeNameCache<T>
+    {
+        public static readonly string Name = typeof(T).Name;
+    }
 }
+
