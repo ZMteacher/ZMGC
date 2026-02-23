@@ -26,12 +26,12 @@ public class GeneratorDataCtrl
     }
     public static string GeneratorDataScrpts(string scriptsName)
     {
-        string nameSpaceName= "ZMGC.Hall";
+        string nameSpaceName= "ZMGC.None";
         StringBuilder sb = new StringBuilder();
         //var writer = File.CreateText(scriptFile);
         sb.AppendLine("/*--------------------------------------------------------------------------------------");
         sb.AppendLine("* Title: 数据脚本自动生成工具");
-        sb.AppendLine("* Author: 铸梦xy");
+        sb.AppendLine("* Author: ZM");
         sb.AppendLine("* Date:" + System.DateTime.Now);
         sb.AppendLine("* Description:数据层,主要负责游戏数据的存储、更新和获取");
         sb.AppendLine("* Modify:");

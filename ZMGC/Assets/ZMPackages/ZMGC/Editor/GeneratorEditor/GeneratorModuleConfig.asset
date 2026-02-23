@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   savePath: HotScripts
   modules:
+  - moduleName: NoneWorld
+    moduleNamespace: ZMGC.None
   - moduleName: HallWorld
     moduleNamespace: ZMGC.Hall
-  - moduleName: SKWorld
-    moduleNamespace: ZMGC.SK
+  - moduleName: GameWorld
+    moduleNamespace: ZMGC.Game
