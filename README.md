@@ -1,4 +1,4 @@
-# <div align="center">ZMGC</div>
+# <div align="center">ZM World Framework</div>
 
 <div align="center">
 
@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Unity](https://img.shields.io/badge/Unity-2021.3.38f1+-black.svg)](https://unity.com/)
 [![C#](https://img.shields.io/badge/C%23-8.0+-brightgreen.svg)](https://learn.microsoft.com/dotnet/csharp/)
-[![Architecture](https://img.shields.io/badge/Architecture-World%20%2B%20DMVC-orange.svg)](#核心特性)
+[![Architecture](https://img.shields.io/badge/Architecture-World%20%2B%20Logic%2FData%2FMsg-orange.svg)](#核心特性)
 
 **[快速开始](#快速开始)** | **[核心特性](#核心特性)** | **[项目结构](#项目结构)** | **[API 概览](#api-概览)**
 
@@ -17,9 +17,9 @@
 
 ---
 
-## ⭐ ZMGC 是什么？
+## ⭐ ZM World Framework 是什么？
 
-ZMGC 是一个面向 Unity 项目的轻量级游戏框架。它以 **World（游戏世界）** 为核心组织单位，将模块拆分为 **逻辑层（Logic）**、**数据层（Data）**、**消息层（Msg）**，并通过统一的生命周期管理、自动发现与 Editor 工具降低项目结构失控和重复代码问题。
+ZM World Framework 是一个面向 Unity 项目的轻量级游戏框架。它以 **World（游戏世界）** 为核心组织单位，将模块拆分为 **逻辑层（Logic）**、**数据层（Data）**、**消息层（Msg）**，并通过统一的生命周期管理、自动发现与 Editor 工具降低项目结构失控和重复代码问题。
 
 它适合用于以下场景：
 
@@ -43,7 +43,7 @@ WorldManager.DestroyWorld<SKWorld>();
 
 ### 🧩 逻辑 / 数据 / 消息三层分离
 
-ZMGC 约定每个 World 下的脚本按职责划分为三层：
+ZM World Framework 约定每个 World 下的脚本按职责划分为三层：
 
 | 层级 | 接口 | 典型命名 | 职责 |
 |------|------|----------|------|
@@ -92,7 +92,7 @@ public class HallWorldScriptExecutionOrder : IBehaviourExecution
 
 ```csharp
 Assembly hotUpdateAssembly = /* 已加载的热更程序集 */;
-WorldManager.CreateWorldByReflection(hotUpdateAssembly, "ZMGC.SK.SKWorld");
+WorldManager.CreateWorldByReflection(hotUpdateAssembly, "YourGame.SK.SKWorld");
 ```
 
 ---
@@ -132,7 +132,7 @@ WorldManager.CreateWorldByReflection(hotUpdateAssembly, "ZMGC.SK.SKWorld");
 本仓库中的 Unity 工程位于：
 
 ```text
-ZMGC\ZMGC
+D:\GitHub Project\ZMGC\ZMGC
 ```
 
 使用 Unity Hub 打开该目录即可。
@@ -141,7 +141,7 @@ ZMGC\ZMGC
 
 你可以任选一种方式接入：
 
-1. 直接复制 `Assets\ZMPackages\ZMGC` 到你的 Unity 项目。
+1. 直接复制 `Assets\ZMPackages\ZMGC` 到你的 Unity 项目（当前目录名仍保留为 `ZMGC` 以兼容现有工程）。
 2. 按项目需要同步 `Packages\manifest.json` 中相关依赖，例如：
 
 ```json
@@ -155,7 +155,7 @@ ZMGC\ZMGC
 ### 创建一个 World
 
 ```csharp
-namespace ZMGC.Hall
+namespace YourGame.Hall
 {
     public class HallWorld : World
     {
@@ -184,7 +184,7 @@ WorldManager.CreateWorld<HallWorld>();
 ### 实现三层脚本
 
 ```csharp
-namespace ZMGC.Hall
+namespace YourGame.Hall
 {
     public class UserDataMgr : IDataBehaviour
     {
@@ -245,7 +245,7 @@ var msg = World.GetMsgLayer<TaskMsgMgr>();
 | 生成逻辑层脚本 | `GameObject/生成业务逻辑层脚本` | `Shift + L` |
 | 生成数据层脚本 | `GameObject/生成数据层脚本` | `Shift + D` |
 | 生成消息层脚本 | `GameObject/生成网络层脚本` | `Shift + N` |
-| 打开生成配置面板 | `ZM/Generator MVC` | - |
+| 打开生成配置面板 | `ZM World Framework/Generator Tools` | - |
 
 ### 配置方式
 
@@ -275,7 +275,7 @@ Assets/ZMPackages/ZMGC/Editor/GeneratorEditor/GeneratorModuleConfig.asset
 
 ```csharp
 Assembly hotUpdateAssembly = /* 加载后的程序集 */;
-WorldManager.CreateWorldByReflection(hotUpdateAssembly, "ZMGC.SK.SKWorld");
+WorldManager.CreateWorldByReflection(hotUpdateAssembly, "YourGame.SK.SKWorld");
 ```
 
 适用于：
@@ -354,4 +354,4 @@ D:\GitHub Project\ZMGC
 
 ## License
 
-本项目使用 **Apache License 2.0**，详见 [LICENSE](LICENSE)。
+本项目对外名称为 **ZM World Framework**，当前工程中的部分目录与示例兼容命名仍保留 `ZMGC`。本项目使用 **Apache License 2.0**，详见 [LICENSE](LICENSE)。
