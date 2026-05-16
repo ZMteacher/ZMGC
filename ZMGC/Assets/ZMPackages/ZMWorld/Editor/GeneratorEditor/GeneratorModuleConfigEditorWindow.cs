@@ -5,7 +5,7 @@
   
   public class GeneratorModuleConfigEditorWindow : EditorWindow
   {
-      public const string ConfigAssetPath = "Assets/ZMPackages/ZMGC/Editor/GeneratorEditor/GeneratorModuleConfig.asset";
+      public const string ConfigAssetPath = "Assets/ZMPackages/ZMWorld/Editor/GeneratorEditor/GeneratorModuleConfig.asset";
   
       private GeneratorModuleConfig config;
       private SerializedObject serializedConfig;
@@ -20,11 +20,11 @@
       // 新增：游戏世界名称输入
       private string _worldName = string.Empty;
   
-      [MenuItem("ZM/Generator MVC", priority = 1)]
+      [MenuItem("ZM/Generator Tools", priority = 1)]
       public static void ShowWindow()
       {
           var window = GetWindow<GeneratorModuleConfigEditorWindow>();
-          window.titleContent = new GUIContent("Generator Config", EditorGUIUtility.IconContent("d_UnityEditor.ConsoleWindow").image);
+          window.titleContent = new GUIContent("ZM World Framework", EditorGUIUtility.IconContent("d_UnityEditor.ConsoleWindow").image);
           window.minSize = new Vector2(420, 400);
       }
   
@@ -111,8 +111,8 @@
           GUILayout.Label(icon, GUILayout.Width(32), GUILayout.Height(32));
   
           EditorGUILayout.BeginVertical();
-          GUILayout.Label("DMVC 自动生成配置", _titleStyle);
-          GUILayout.Label("配置代码生成模块及保存路径", _subtitleStyle);
+          GUILayout.Label("ZM World Framework 配置", _titleStyle);
+          GUILayout.Label("配置 World 模块、脚本生成与保存路径", _subtitleStyle);
           EditorGUILayout.EndVertical();
   
           EditorGUILayout.EndHorizontal();
@@ -143,7 +143,7 @@
           if (config == null)
           {
               EditorGUILayout.Space(2);
-              EditorGUILayout.HelpBox("未在路径 `Assets/ZMPackages/ZMGC/Editor/GeneratorEditor/GeneratorModuleConfig.asset` 找到 GeneratorModuleConfig 资源，请检查路径或手动选择。", MessageType.Info);
+              EditorGUILayout.HelpBox("未在路径 `Assets/ZMPackages/ZMWorld/Editor/GeneratorEditor/GeneratorModuleConfig.asset` 找到 GeneratorModuleConfig 资源，请检查路径或手动选择。", MessageType.Info);
           }
   
           EditorGUILayout.EndVertical();

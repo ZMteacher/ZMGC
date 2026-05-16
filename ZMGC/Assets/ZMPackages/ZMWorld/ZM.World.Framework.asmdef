@@ -1,10 +1,10 @@
 {
-    "name": "ZM.GC.Editor",
+    "name": "ZM.World.Framework",
     "rootNamespace": "",
-    "references": [],
-    "includePlatforms": [
-        "Editor"
+    "references": [
+        "GUID:a1eff1019d1939d4b81d7dae7244778b"
     ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

@@ -1,7 +1,7 @@
 {
-  "name": "com.zm.ui",
+  "name": "com.zm.worldframework",
   "version": "1.0.0",
-  "displayName": "ZMUI",
-  "description": "Package description",
+  "displayName": "ZM World Framework",
+  "description": "A Unity game framework built around World-based lifecycle management and Logic/Data/Message layering.",
   "unity": "2019.1" // 最低支持的Unity版本
 }

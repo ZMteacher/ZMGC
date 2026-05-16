@@ -26,12 +26,12 @@ public class GeneratorMsgCtrl
     }
 
      
-    public static void AutoGeneratorMsgScripts(string worldName, string scriptsName,string nameSpace="ZMGC.None", bool isAutoGenerator=false)
+    public static void AutoGeneratorMsgScripts(string worldName, string scriptsName,string nameSpace="YourGame.None", bool isAutoGenerator=false)
     {
         string viewStr = GeneratorMsgScripts(scriptsName,nameSpace);
         GeneratorModuleWindow.ShowWindow(viewStr, scriptsName + ".cs",worldName,isAutoGenerator,"MsgLayer");
     }
-    public static string GeneratorMsgScripts(string scriptsName,string nameSpace="ZMGC.None")
+    public static string GeneratorMsgScripts(string scriptsName,string nameSpace="YourGame.None")
     {
         string nameSpaceName=nameSpace;
         StringBuilder sb = new StringBuilder();

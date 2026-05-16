@@ -15,8 +15,8 @@ MonoBehaviour:
   savePath: HotScripts
   modules:
   - moduleName: NoneWorld
-    moduleNamespace: ZMGC.None
+    moduleNamespace: ZM.None
+  - moduleName: LoginWorld
+    moduleNamespace: ZM.Login
   - moduleName: HallWorld
-    moduleNamespace: ZMGC.Hall
-  - moduleName: GameWorld
-    moduleNamespace: ZMGC.Game
+    moduleNamespace: ZM.Hall

@@ -1,17 +1,28 @@
 ﻿using System;
-public class HallWorldScriptExecutionOrder  :IBehaviourExecution
+
+/// <summary>
+/// HallWorld 的脚本初始化顺序配置示例。
+/// 使用方式：在你的 HallWorld 类中重写 GetBehaviourExecution()：
+/// <code>
+/// public class HallWorld : World {
+///     public override IBehaviourExecution GetBehaviourExecution()
+///         => new HallWorldScriptExecutionOrder();
+/// }
+/// </code>
+/// </summary>
+public class HallWorldScriptExecutionOrder : IBehaviourExecution
 {
     private static readonly string[] LogicBehaviorExecutions = new string[] {
-       "TaskLogicCtrl",
+       "HallLogicCtrl",
      };
 
     private static readonly string[] DataBehaviorExecutions = new string[] {
-       "RankDataMgr",
        "UserDataMgr",
+       "TaskDataMgr",
      };
 
     private static readonly string[] MsgBehaviorExecutions = new string[] {
-       "TaskMsgMgr",
+       "HallMsgMgr",
      };
 
     public string[] GetDataBehaviourExecution()

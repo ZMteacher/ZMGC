@@ -24,7 +24,7 @@ public class GeneratorModuleWindow : EditorWindow
     private int mColumnWidth=300;
     public static void ShowWindow(string conent, string fileName)
     {
-        GeneratorModuleWindow window = (GeneratorModuleWindow)GetWindow(typeof(GeneratorModuleWindow),false,"MVC脚本生成检查器");
+        GeneratorModuleWindow window = (GeneratorModuleWindow)GetWindow(typeof(GeneratorModuleWindow),false,"ZM World Framework 脚本生成器");
         window.Show();
         window.mScriptTxt = conent;
         window.mFileName = fileName;
@@ -32,7 +32,7 @@ public class GeneratorModuleWindow : EditorWindow
     }
     public static void ShowWindow(string conent, string fileName,string worldName,bool isAutoGenerator,string folder)
     {
-        GeneratorModuleWindow window = (GeneratorModuleWindow)GetWindow(typeof(GeneratorModuleWindow),false,"MVC脚本生成检查器");
+        GeneratorModuleWindow window = (GeneratorModuleWindow)GetWindow(typeof(GeneratorModuleWindow),false,"ZM World Framework 脚本生成器");
         window.Show();
         window.mScriptTxt = conent;
         window.mFileName = fileName;
@@ -150,7 +150,7 @@ public class GeneratorModuleWindow : EditorWindow
             Close();
             return;
         }
-        if (EditorUtility.DisplayDialog("自动化工具", "生成脚本成功！", "确定"))
+        if (EditorUtility.DisplayDialog("ZM World Framework", "生成脚本成功！", "确定"))
         {
             Close();
         }

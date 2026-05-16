@@ -6,11 +6,11 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-public class GeneratorLogicCtrl
+public class GeneratorDataCtrl
 {
 
-    [MenuItem("GameObject/生成业务逻辑层脚本(Shift+L) #L", false, 0)]
-    public static void GeneratorLogicController()
+    [MenuItem("GameObject/生成数据层脚本(Shift+D) #D", false, 0)]
+    public static void GeneratorDataController()
     {
         var gameObject = Selection.activeObject;
 
@@ -20,26 +20,25 @@ public class GeneratorLogicCtrl
             return;
         }
  
-        string logicName = gameObject.name.Replace("Window", "")+ "LogicCtrl";
-        string viewStr = GeneratorLogicScripts(logicName);
-        GeneratorModuleWindow.ShowWindow(viewStr, logicName+".cs");
+        string dataName = gameObject.name.Replace("Window", "") + "DataMgr";
+        string viewStr = GeneratorDataScripts(dataName);
+        GeneratorModuleWindow.ShowWindow(viewStr, dataName + ".cs");
     }
-    
-    public static void AutoGeneratorLogicScripts(string worldName, string scriptsName,string nameSpace="ZMGC.None", bool isAutoGenerator=false)
+    public static void AutoGeneratorDataScripts(string worldName, string scriptsName,string nameSpace="YourGame.None", bool isAutoGenerator=false)
     {
-        string viewStr = GeneratorLogicScripts(scriptsName,nameSpace);
-        GeneratorModuleWindow.ShowWindow(viewStr, scriptsName + ".cs",worldName,isAutoGenerator,"LogicLayer");
+        string viewStr = GeneratorDataScripts(scriptsName,nameSpace);
+        GeneratorModuleWindow.ShowWindow(viewStr, scriptsName + ".cs",worldName,isAutoGenerator,"DataLayer");
     }
-    public static string GeneratorLogicScripts(string scriptsName,string nameSpace="ZMGC.None")
+    public static string GeneratorDataScripts(string scriptsName,string nameSpace="YourGame.None")
     {
-        string nameSpaceName=nameSpace;
+        string nameSpaceName= nameSpace;
         StringBuilder sb = new StringBuilder();
         //var writer = File.CreateText(scriptFile);
         sb.AppendLine("/*--------------------------------------------------------------------------------------");
-        sb.AppendLine("* Title: 业务逻辑脚本自动生成工具");
+        sb.AppendLine("* Title: 数据脚本自动生成工具");
         sb.AppendLine("* Author: ZM");
         sb.AppendLine("* Date:" + System.DateTime.Now);
-        sb.AppendLine("* Description:业务逻辑层,主要负责游戏的业务逻辑处理");
+        sb.AppendLine("* Description:数据层,主要负责游戏数据的存储、更新和获取");
         sb.AppendLine("* Modify:");
         sb.AppendLine("* 注意:以下文件为自动生成，强制再次生成将会覆盖");
         sb.AppendLine("----------------------------------------------------------------------------------------*/");
@@ -52,7 +51,7 @@ public class GeneratorLogicCtrl
         }
 
 
-        sb.AppendLine($"\tpublic  class {scriptsName} : ILogicBehaviour");
+        sb.AppendLine($"\tpublic  class {scriptsName} : IDataBehaviour");
         sb.AppendLine("\t{");
         sb.AppendLine("\t");
 
@@ -62,11 +61,7 @@ public class GeneratorLogicCtrl
         sb.AppendLine("\t\t" + " }");
         sb.AppendLine("\t\t");
 
-        //sb.AppendLine("\t\t" + " public  void OnUpdate()");
-        //sb.AppendLine("\t\t" + " {");
-        //sb.AppendLine("\t\t");
-        //sb.AppendLine("\t\t" + " }");
-        //sb.AppendLine("\t\t");
+  
 
         sb.AppendLine("\t\t" + " public  void OnDestroy()");
         sb.AppendLine("\t\t" + " {");
