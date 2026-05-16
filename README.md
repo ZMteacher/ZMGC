@@ -132,7 +132,7 @@ WorldManager.CreateWorldByReflection(hotUpdateAssembly, "YourGame.SK.SKWorld");
 本仓库中的 Unity 工程位于：
 
 ```text
-D:\GitHub Project\ZMGC\ZMGC
+D:\GitHub Project\ZMWorld\ZMWorld
 ```
 
 使用 Unity Hub 打开该目录即可。
@@ -141,7 +141,7 @@ D:\GitHub Project\ZMGC\ZMGC
 
 你可以任选一种方式接入：
 
-1. 直接复制 `Assets\ZMPackages\ZMGC` 到你的 Unity 项目（当前目录名仍保留为 `ZMGC` 以兼容现有工程）。
+1. 直接复制 `Assets\ZMPackages\ZMWorld` 到你的 Unity 项目。
 2. 按项目需要同步 `Packages\manifest.json` 中相关依赖，例如：
 
 ```json
@@ -258,7 +258,7 @@ var msg = World.GetMsgLayer<TaskMsgMgr>();
 默认配置资源路径：
 
 ```text
-Assets/ZMPackages/ZMGC/Editor/GeneratorEditor/GeneratorModuleConfig.asset
+Assets/ZMPackages/ZMWorld/Editor/GeneratorEditor/GeneratorModuleConfig.asset
 ```
 
 ### 典型流程
@@ -289,14 +289,14 @@ WorldManager.CreateWorldByReflection(hotUpdateAssembly, "YourGame.SK.SKWorld");
 ## 项目结构
 
 ```text
-D:\GitHub Project\ZMGC
+D:\GitHub Project\ZMWorld
 ├── README.md
 ├── LICENSE
-└── ZMGC
+└── ZMWorld
     ├── Assets
     │   ├── Scenes
     │   └── ZMPackages
-    │       └── ZMGC
+    │       └── ZMWorld
     │           ├── Base
     │           │   ├── IBehaviourExecution.cs
     │           │   ├── IDataBehaviour.cs
@@ -354,4 +354,4 @@ D:\GitHub Project\ZMGC
 
 ## License
 
-本项目对外名称为 **ZM World Framework**，当前工程中的部分目录与示例兼容命名仍保留 `ZMGC`。本项目使用 **Apache License 2.0**，详见 [LICENSE](LICENSE)。
+本项目对外名称为 **ZM World Framework**，当前工程中的部分目录与示例兼容命名仍保留 `ZMWorld`。本项目使用 **Apache License 2.0**，详见 [LICENSE](LICENSE)。
